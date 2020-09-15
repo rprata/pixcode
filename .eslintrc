@@ -1,0 +1,21 @@
+{
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint", "jest"],
+  "env": {
+    "node": true,
+    "jest/globals": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "implicit-arrow-linebreak": "off",
+    "no-await-in-loop": "off",
+    "import/prefer-default-export": "off",
+    "function-paren-newline": ["error", "multiline-arguments"],
+    "semi": ["error", "never"],
+    "space-in-parens": ["error", "never"],
+    "max-len": ["error", { "code": 120, "ignoreStrings": true }],
+    "quotes": ["error", "single"],
+    "indent": ["error", 2]
+  }
+}
