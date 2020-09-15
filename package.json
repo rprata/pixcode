@@ -2,19 +2,13 @@
   "name": "pixcode",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "description": "Pixcode module is used to handler PIX qrcode based on BCB specification",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --config jestconfig.json"
   },
-  "author": "Renan Prata",
-  "license": "MIT",
-  "keywords": [
-    "qrcode",
-    "parser",
-    "pix"
-  ],
   "devDependencies": {
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
@@ -28,5 +22,20 @@
   },
   "dependencies": {
     "crc-full": "^1.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rprata/pixcode.git"
+  },
+  "homepage": "https://github.com/rprata/pixcode#readme",
+  "author": "Renan Prata",
+  "license": "MIT",
+  "keywords": [
+    "qrcode",
+    "parser",
+    "pix"
+  ],
+  "files": [
+    "lib/**/*"
+  ]
 }

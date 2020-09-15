@@ -1,7 +1,5 @@
 import { parse } from '../lib'
 
-// // https://outline.com/5a8yAe
-
 describe('PIX Code - Parser', () => {
   it('should parse complete qrcode and returns a valid object', () => {
     const qrcode = '00020101021226720014br.gov.bcb.pix2550bx.com.br/pix/8b3da2f3-9a41-40d1-a91a-bd93113bd4415204000053039865406123.455802BR5913Fulano de Tal6008BRASILIA62190515RP12345678-2019630445C8'
