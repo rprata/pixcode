@@ -2,3 +2,4 @@ src
 tsconfig.json
 .eslintrc
 eslintingnore
+.circleci

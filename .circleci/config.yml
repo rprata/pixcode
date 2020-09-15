@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: node:12
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build project
+          command: npm run build
+      - run:
+          name: Run tests
+          command: npm test
+
+  lint:
+    docker:
+      - image: node:12
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run lint
+          command: npm run lint
+
+workflows:
+  version: 2.1
+  test_and_lint:
+    jobs:
+      - test
+      - lint
