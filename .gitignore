@@ -105,3 +105,6 @@ dist
 
 # Output dir
 lib
+
+# vscode dir
+.vscode
