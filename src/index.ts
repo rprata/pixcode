@@ -167,7 +167,7 @@ const parse = (value: string): PIXCode => {
     result.merchantAccountInformation.value = value.substring(pos, pos += result.merchantAccountInformation.length)
   } else {
     pos -= 2
-    throw new Error('Merchant Account was not found')
+    throw new Error('Merchant Account Information was not found')
   }
 
   if (value.substring(pos, pos += 2) === EmvTag.MerchantCategoryCode) {

@@ -14,7 +14,10 @@
     "function-paren-newline": ["error", "multiline-arguments"],
     "semi": ["error", "never"],
     "space-in-parens": ["error", "never"],
-    "max-len": ["error", { "code": 120, "ignoreStrings": true }],
+    "max-len": [
+      "error",
+      { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true }
+    ],
     "quotes": ["error", "single"],
     "indent": ["error", 2]
   }
