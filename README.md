@@ -3,7 +3,7 @@
 ![Support Node of LTS](https://img.shields.io/badge/node-LTS-brightgreen.svg?style=plastic) ![npm version](https://img.shields.io/badge/npm-6.14.4-brightgreen.svg?style=plastic) ![npm version](https://img.shields.io/badge/yarn-1.22.4-brightgreen.svg?style=plastic) ![dependencies typescript](https://img.shields.io/badge/dependencies-typescript-blue.svg?style=plastic) ![License mit](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)
 
 # Description
-Pixcode module is used to handler PIX qrcode based on [BCB specification](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix-versao1.pdf). It's completely written in typescript for node js.
+Pixcode module is used to handler PIX qrcode based on [BCB specification](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix-versao1.pdf) and [BRCode Manual](https://www.bcb.gov.br/content/estabilidadefinanceira/SiteAssets/Manual%20do%20BR%20Code.pdf). It's completely written in typescript for node js.
 
 
 # How to use
