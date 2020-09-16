@@ -1,5 +1,5 @@
 {
-  "name": "@rprata/pixcode",
+  "name": "pixcode",
   "version": "1.0.0",
   "main": "lib/index.js",
   "description": "Pixcode module is used to handler PIX qrcode based on BCB specification",
