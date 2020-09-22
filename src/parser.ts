@@ -2,7 +2,7 @@ import { CRC } from 'crc-full'
 import { PIXCode, EmvTag } from './pixcode'
 
 const parse = (value: string): PIXCode => {
-  const result = {
+  const result: PIXCode = {
     payloadFormatIndicator: {
       id: EmvTag.PayloadFormatIndicator,
       name: 'Payload Format Indicator',
@@ -107,7 +107,7 @@ const parse = (value: string): PIXCode => {
       mandatory: true,
       description: 'CRC'
     }
-  } as PIXCode
+  }
 
   let pos = 6
   let unreservedTemplatesId = ''
