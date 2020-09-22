@@ -33,7 +33,10 @@
   "keywords": [
     "qrcode",
     "parser",
-    "pix"
+    "generator",
+    "payment",
+    "pix",
+    "bcb"
   ],
   "files": [
     "lib/**/*"
