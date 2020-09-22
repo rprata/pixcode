@@ -6,6 +6,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./lib"
   },
