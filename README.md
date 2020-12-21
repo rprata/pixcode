@@ -193,7 +193,7 @@ const pixcode = {
     value: '0515RP12345678-2019'
   }
 }
-const result = generate(pixcode as PIXCode)
+const result = await generate(pixcode as PIXCode)
 console.log(result.payload())
 
 console.log(result.base64())
