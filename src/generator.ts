@@ -1,28 +1,29 @@
 import { CRC } from 'crc-full'
-import { PIXCode, EmvTag } from './pixcode'
+import qrcode from 'qrcode'
+import { PIXCode, EmvTag, QRCode } from './pixcode'
 
 const pad = (n: number) => {
   const s = n.toString()
   return s.length == 1 ? '0' + s : s
 }
 
-const generate = (pixcode: PIXCode): string => {
+const generate = async (pixcode: PIXCode): Promise<QRCode> => {
 
-  let result = ''
+  let payloadPix = ''
 
-  result += '000201'
+  payloadPix += '000201'
 
   if (pixcode.pointOfInitiationMethod) {
     const { id, length, value } = pixcode.pointOfInitiationMethod
     if (EmvTag.PointOfInitiationMethod !== id) {
       throw new Error('Point Of Initiation Method tag is wrong')
     }
-    result += EmvTag.PointOfInitiationMethod
-    result += pad(length)
+    payloadPix += EmvTag.PointOfInitiationMethod
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Point Of Initiation Method value is not conformed')
     }
-    result += value
+    payloadPix += value
   }
 
   if (pixcode.merchantAccountInformation) {
@@ -30,12 +31,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.MerchantAccountInformation !== id) {
       throw new Error('Merchant Account Information tag is wrong')
     }
-    result += EmvTag.MerchantAccountInformation
-    result += pad(length)
+    payloadPix += EmvTag.MerchantAccountInformation
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Merchant Account Information value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Merchant Account Information is mandatory')
   }
@@ -45,12 +46,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.MerchantCategoryCode !== id) {
       throw new Error('Merchant Category Code tag is wrong')
     }
-    result += EmvTag.MerchantCategoryCode
-    result += pad(length)
+    payloadPix += EmvTag.MerchantCategoryCode
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Merchant Category Code value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Merchant Category Code is mandatory')
   }
@@ -60,12 +61,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.TransactionCurrency !== id) {
       throw new Error('Transaction Currency tag is wrong')
     }
-    result += EmvTag.TransactionCurrency
-    result += pad(length)
+    payloadPix += EmvTag.TransactionCurrency
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Transaction Currency value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Transaction Currency is mandatory')
   }
@@ -75,12 +76,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.TransactionAmount !== id) {
       throw new Error('Transaction Amount tag is wrong')
     }
-    result += EmvTag.TransactionAmount
-    result += pad(length)
+    payloadPix += EmvTag.TransactionAmount
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Transaction Amount value is not conformed')
     }
-    result += value
+    payloadPix += value
   }
 
   if (pixcode.countryCode) {
@@ -88,12 +89,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.CountryCode !== id) {
       throw new Error('Country Code tag is wrong')
     }
-    result += EmvTag.CountryCode
-    result += pad(length)
+    payloadPix += EmvTag.CountryCode
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Country Code value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Country Code is mandatory')
   }
@@ -103,12 +104,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.MerchantName !== id) {
       throw new Error('Merchant Name tag is wrong')
     }
-    result += EmvTag.MerchantName
-    result += pad(length)
+    payloadPix += EmvTag.MerchantName
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Merchant Name value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Merchant Name is mandatory')
   }
@@ -118,12 +119,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.MerchantCity !== id) {
       throw new Error('Merchant City tag is wrong')
     }
-    result += EmvTag.MerchantCity
-    result += pad(length)
+    payloadPix += EmvTag.MerchantCity
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Merchant City value is not conformed')
     }
-    result += value
+    payloadPix += value
   } else {
     throw new Error('Merchant City is mandatory')
   }
@@ -133,12 +134,12 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.PostalCode !== id) {
       throw new Error('Postal Code tag is wrong')
     }
-    result += EmvTag.PostalCode
-    result += pad(length)
+    payloadPix += EmvTag.PostalCode
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Postal Code value is not conformed')
     }
-    result += value
+    payloadPix += value
   }
 
   if (pixcode.additionalDataField) {
@@ -146,34 +147,40 @@ const generate = (pixcode: PIXCode): string => {
     if (EmvTag.AdditionalDataField !== id) {
       throw new Error('Additional Data Field tag is wrong')
     }
-    result += EmvTag.AdditionalDataField
-    result += pad(length)
+    payloadPix += EmvTag.AdditionalDataField
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Additional Data Field is not conformed')
     }
-    result += value
+    payloadPix += value
   }
 
   if (pixcode.unreservedTemplates) {
     const { id, length, value } = pixcode.unreservedTemplates
-    result += id
-    result += pad(length)
+    payloadPix += id
+    payloadPix += pad(length)
     if (length !== value.length) {
       throw new Error('Unreserved Templates is not conformed')
     }
-    result += value
+    payloadPix += value
   }
 
-  result += EmvTag.CRC
-  result += '04'
+  payloadPix += EmvTag.CRC
+  payloadPix += '04'
   const crc = CRC.default('CRC16_CCITT_FALSE')
   if (crc) {
-    const computed_crc = crc.compute(Buffer.from(result, 'ascii')).toString(16).toUpperCase()
-    result += computed_crc
+    const computed_crc = crc.compute(Buffer.from(payloadPix, 'ascii')).toString(16).toUpperCase()
+    payloadPix += computed_crc
   } else {
     throw new Error('Error to generate CRC')
   }
-  return result
+
+  const base64 = await qrcode.toDataURL(payloadPix)
+
+  return {
+    payload: () => payloadPix,
+    base64: () => base64
+  }
 }
 
 export {

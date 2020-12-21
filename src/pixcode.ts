@@ -38,8 +38,14 @@ interface PIXCode {
   crc: TLV
 }
 
+interface QRCode {
+  payload: () => string,
+  base64: () => string
+}
+
 export {
   EmvTag,
   TLV,
-  PIXCode
+  PIXCode,
+  QRCode
 }
