@@ -170,7 +170,7 @@ const generate = async (pixcode: PIXCode): Promise<QRCode> => {
   const crc = CRC.default('CRC16_CCITT_FALSE')
   if (crc) {
     const computed_crc = crc.compute(Buffer.from(payloadPix, 'ascii')).toString(16).toUpperCase()
-    payloadPix += computed_crc
+    payloadPix += computed_crc.padStart(4, '0')
   } else {
     throw new Error('Error to generate CRC')
   }
