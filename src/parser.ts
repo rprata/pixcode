@@ -213,7 +213,7 @@ const parse = (value: string): PIXCode => {
   if (crc) {
     const buff = value.substr(0, value.length - 4)
     const computed_crc = crc.compute(Buffer.from(buff, 'ascii')).toString(16).toUpperCase()
-    if (computed_crc !== result.crc.value) {
+    if (computed_crc.padStart(4, '0') !== result.crc.value) {
       throw new Error('Invalid CRC')
     }
   }
